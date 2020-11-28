@@ -1,8 +1,14 @@
-import flask
+import flask 
+# pip install Flask
 from flask import request, jsonify
+# pip install flask-requests
+# pip install jsonify
 import requests
+# pip install requests
 import json
+# pip install jsonlib
 import sqlite3
+# pip install db-sqlite3
 
 
 
@@ -23,10 +29,10 @@ def dict_factory(cursor, row):
 
 @app.route('/api', methods=['GET'])
 def home():
-    db = sqlite3.connect('ZPI.db')
+    db = sqlite3.connect('F:/uczelnia/ZPI/projekt/AplikacjaKsi-kaKucharska/other/ZPI.db')
     db.row_factory = dict_factory
     c = db.cursor()
-    wynik = c.execute('SELECT Przepisy.Nazwa, Przep_Skład.Id, Składniki.Nazwa FROM Przep_Skład LEFT JOIN Przepisy ON (Przep_Skład.Id_Przepis=Przepisy.Id) INNER JOIN Składniki ON (Przep_Skład.Id_Skład=Składniki.Id)').fetchall()
+    wynik = c.execute('SELECT Przepisy.Nazwa_Przepisy, Przepisy.Przepis, Składniki.Nazwa_Składniki, Przep_Skład.Ilość, Przep_Skład.Typ FROM Przep_Skład LEFT JOIN Przepisy ON (Przep_Skład.Id_Przepis=Przepisy.Id_Przepisy) INNER JOIN Składniki ON (Przep_Skład.Id_Skład=Składniki.Id_Składniki)').fetchall()
     # db.close()
     return jsonify(wynik)
 
