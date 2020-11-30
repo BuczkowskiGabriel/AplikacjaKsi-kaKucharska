@@ -9,8 +9,10 @@ import json
 # pip install jsonlib
 import sqlite3
 # pip install db-sqlite3
-
-
+import numpy
+# pip install numpy
+from numpy import random
+# pip install random2
 
 
 
@@ -23,6 +25,10 @@ def dict_factory(cursor, row):
     for idx, col in enumerate(cursor.description):
         d[col[0]] = row[idx]
     return d
+
+
+
+
 
 
 
@@ -40,7 +46,7 @@ def home():
 @app.route('/api', methods=['POST'])
 def wstawianie():
         data = request.get_json()
-        db = sqlite3.connect('ZPI.db')
+        db = sqlite3.connect('F:/uczelnia/ZPI/projekt/AplikacjaKsi-kaKucharska/other/ZPI.db')
         db.row_factory = dict_factory
         c = db.cursor()
         for x in data:
@@ -55,6 +61,16 @@ def wstawianie():
         #     db.commit()
         return jsonify('data inserted')
 
+
+@app.route('/skladniki', methods=['GET'])
+def skladniki():
+
+    db = sqlite3.connect('F:/uczelnia/ZPI/projekt/AplikacjaKsi-kaKucharska/other/ZPI.db')
+    db.row_factory = dict_factory
+    c = db.cursor()
+    wynik = c.execute('SELECT Nazwa_Składniki FROM Składniki WHERE Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ?', [random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62)]).fetchall()
+    # db.close()
+    return jsonify(wynik)
 
 
 app.run()
