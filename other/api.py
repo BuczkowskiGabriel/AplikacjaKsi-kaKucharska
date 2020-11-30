@@ -16,6 +16,9 @@ from numpy import random
 
 
 
+
+
+
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -33,20 +36,29 @@ def dict_factory(cursor, row):
 
 
 
-@app.route('/api', methods=['GET'])
-def home():
-    db = sqlite3.connect('F:/uczelnia/ZPI/projekt/AplikacjaKsi-kaKucharska/other/ZPI.db')
+@app.route('/przepisy', methods=['GET'])
+def przepisy():
+    db = sqlite3.connect('other/ZPI.db')
     db.row_factory = dict_factory
     c = db.cursor()
-    wynik = c.execute('SELECT Przepisy.Nazwa_Przepisy, Przepisy.Przepis, Składniki.Nazwa_Składniki, Przep_Skład.Ilość, Przep_Skład.Typ FROM Przep_Skład LEFT JOIN Przepisy ON (Przep_Skład.Id_Przepis=Przepisy.Id_Przepisy) INNER JOIN Składniki ON (Przep_Skład.Id_Skład=Składniki.Id_Składniki)').fetchall()
-    # db.close()
+
+    RandomNumbersBefore = [1,2,3,4,5,6,7,8,9,10]
+    random.shuffle(RandomNumbersBefore)
+    RandomNumbers = RandomNumbersBefore[:4]
+    RandomNumbers.sort()
+
+
+    wynik = c.execute('SELECT Nazwa_Przepisy, Przepis From Przepisy WHERE Id_Przepisy = ? OR Id_Przepisy = ? OR Id_Przepisy = ? OR Id_Przepisy = ?', [RandomNumbers[0], RandomNumbers[1], RandomNumbers[2], RandomNumbers[3]]).fetchall()
+    for x in range(0,4):
+        wynik[x]['skladniki'] = (c.execute('SELECT Składniki.Nazwa_Składniki, Przep_Skład.Ilość, Przep_Skład.Typ FROM Przep_Skład INNER JOIN Składniki ON (Przep_Skład.Id_Skład=Składniki.Id_Składniki) WHERE Przep_Skład.Id_Przepis = ?', [RandomNumbers[x]]).fetchall())
+
     return jsonify(wynik)
 
 
 @app.route('/api', methods=['POST'])
 def wstawianie():
         data = request.get_json()
-        db = sqlite3.connect('F:/uczelnia/ZPI/projekt/AplikacjaKsi-kaKucharska/other/ZPI.db')
+        db = sqlite3.connect('other/ZPI.db')
         db.row_factory = dict_factory
         c = db.cursor()
         for x in data:
@@ -65,9 +77,10 @@ def wstawianie():
 @app.route('/skladniki', methods=['GET'])
 def skladniki():
 
-    db = sqlite3.connect('F:/uczelnia/ZPI/projekt/AplikacjaKsi-kaKucharska/other/ZPI.db')
+    db = sqlite3.connect('other/ZPI.db')
     db.row_factory = dict_factory
     c = db.cursor()
+
     wynik = c.execute('SELECT Nazwa_Składniki FROM Składniki WHERE Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ? OR Id_Składniki = ?', [random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62), random.randint(1, 62)]).fetchall()
     # db.close()
     return jsonify(wynik)
