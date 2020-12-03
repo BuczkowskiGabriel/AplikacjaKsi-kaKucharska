@@ -1,8 +1,12 @@
 import sqlite3
+# pip install db-sqlite3
+import flask 
+# pip install Flask
+from flask import request, jsonify
 
 
 def ConnectToDatabase():
-    db = sqlite3.connect('akk-db/akk.db')
+    db = sqlite3.connect('other/ZPI.db')
     db.row_factory = dict_factory
     return db
 

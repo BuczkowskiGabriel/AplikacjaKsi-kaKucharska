@@ -1,0 +1,92 @@
+[
+    {
+"nazwa": "Ryba po grecku",
+"przepis": "",
+"składniki":[
+    {
+        "Ilość": 1000,
+        "Nazwa_Składniki": "ryba",
+        "Typ": "g"
+    },
+    {
+        "Ilość": 1,
+        "Nazwa_Składniki": "mąka",
+        "Typ": "nieokreślone"
+    },
+    {
+        "Ilość": 1,
+        "Nazwa_Składniki": "pieprz",
+        "Typ": "szczypta"
+    },
+    {
+        "Ilość": 1,
+        "Nazwa_Składniki": "olej",
+        "Typ": "nieokreślone"
+    },
+    {
+        "Ilość": 500,
+        "Nazwa_Składniki": "marchewka",
+        "Typ": "g"
+    },
+    {
+        "Ilość": 200,
+        "Nazwa_Składniki": "pietruszka",
+        "Typ": "g"
+    },
+    {
+        "Ilość": 200,
+        "Nazwa_Składniki": "seler",
+        "Typ": "g"
+    },
+    {
+        "Ilość": 100,
+        "Nazwa_Składniki": "por",
+        "Typ": "g"
+    },
+    {
+        "Ilość": 1,
+        "Nazwa_Składniki": "cebula",
+        "Typ": "szt"
+    },
+    {
+        "Ilość": 8,
+        "Nazwa_Składniki": "ziele angielskie",
+        "Typ": "szt"
+    },
+    {
+        "Ilość": 4,
+        "Nazwa_Składniki": "liść laurowy",
+        "Typ": "szt"
+    },
+    {
+        "Ilość": 1,
+        "Nazwa_Składniki": "sól",
+        "Typ": "łyżeczki"
+    },
+    {
+        "Ilość": 100,
+        "Nazwa_Składniki": "koncentrat pomidorowy",
+        "Typ": "g"
+    },
+    {
+        "Ilość": 2,
+        "Nazwa_Składniki": "musztarda",
+        "Typ": "łyżeczki"
+    },
+    {
+        "Ilość": 0.5,
+        "Nazwa_Składniki": "cytryna",
+        "Typ": "szt"
+    },
+    {
+        "Ilość": 1,
+        "Nazwa_Składniki": "oliwa",
+        "Typ": "łyżka"
+    },
+    {
+        "Ilość": 1,
+        "Nazwa_Składniki": "cukier",
+        "Typ": "łyżka"
+    }
+]
+}]
